@@ -1,4 +1,0 @@
-from first.nums import plus
-
-if __name__ == '__main':
-  print(plus(3, 3))
