@@ -1,81 +1,33 @@
-myList = [
-    [" ", "0", "1","2"],
-    ["0", " ", " "," "],
-    ["1", " ", " "," "],
-    ["2", " ", " "," "]
-]
-def print_list():
-    for i in myList:
-        print(*i)
+theBroad = {'topL':' ', 'topM':' ', 'topR':' ',
+            'midL':' ', 'midM':' ', 'midR':' ',
+            'lowL':' ', 'lowM':' ', 'lowR':' '}
+def printBroad(broad):
+    print(broad['topL'] + '|' + broad['topM'] + '|' + broad['topR'])
+    print('-+-+-')
+    print(broad['midL'] + '|' + broad[ 'midM'] + '|' + broad['midR'])
+    print('-+-+-')
+    print (broad['lowL'] + '|' + broad['lowM'] + '|' + broad['lowR'])
+turn = 'X'
+game = True
+printBroad(theBroad)
 
-def check():
-    if myList[1][1]=="X" and myList[1][2]=="X" and myList[1][3]=="X":
-        print("Победили крестики")
-        return False
-    elif myList[2][1]=="X" and myList[2][2]=="X" and myList[2][3]=="X":
-        print("Победили крестики")
-        return False
-    elif myList[3][1] == "X" and myList[3][2] == "X" and myList[3][3] == "X":
-        print("Победили крестики")
-        return False
-    elif myList[1][1] == "X" and myList[2][1] == "X" and myList[3][1] == "X":
-        print("Победили крестики")
-        return False
-    elif myList[1][2] == "X" and myList[2][2] == "X" and myList[3][2] == "X":
-        print("Победили крестики")
-        return False
-    elif myList[1][3] == "X" and myList[2][3] == "X" and myList[3][3] == "X":
-        print("Победили крестики")
-        return False
-    elif myList[1][1] == "X" and myList[2][2] == "X" and myList[3][3] == "X":
-        print("Победили крестики")
-        return False
-    elif myList[1][3] == "X" and myList[2][2] == "X" and myList[3][1] == "X":
-        print("Победили крестики")
-        return False
-    elif myList[1][1]=="0" and myList[1][2]=="0" and myList[1][3]=="0":
-        print("Победили нолики")
-        return False
-    elif myList[2][1]=="0" and myList[2][2]=="0" and myList[2][3]=="0":
-        print("Победили нолики")
-        return False
-    elif myList[3][1] == "0" and myList[3][2] == "0" and myList[3][3] == "0":
-        print("Победили нолики")
-        return False
-    elif myList[1][1] == "0" and myList[2][1] == "0" and myList[3][1] == "0":
-        print("Победили нолики")
-        return False
-    elif myList[1][2] == "0" and myList[2][2] == "0" and myList[3][2] == "0":
-        print("Победили нолики")
-        return False
-    elif myList[1][3] == "0" and myList[2][3] == "0" and myList[3][3] == "0":
-        print("Победили нолики")
-        return False
-    elif myList[1][1] == "0" and myList[2][2] == "0" and myList[3][3] == "0":
-        print("Победили нолики")
-        return False
-    elif myList[1][3] == "0" and myList[2][2] == "0" and myList[3][1] == "0":
-        print("Победили нолики")
-        return False
+while game:
+    print('Just put enter for the end')
+    print('Turn for' + turn + '. Move on wich space?')
+    move = input()
+    if move == ' ':
+        break
+    elif move not in ['lowL', 'lowM', 'lowR', 'midL', 'midM', 'midR', 'topL', 'topM', 'topR']:
+        print('Error, these symbols are not included in the game conditions')
+        print('Change your turn:')
+        continue
+    elif theBroad[move] != ' ':
+        print('Error, this cell is already occupied')
+        print('Change your turn:')
+        continue
+    theBroad[move] = turn
+    printBroad(theBroad)
+    if turn == 'X':
+        turn = '0'
     else:
-        return True
-
-print_list()
-
-for j in range(1,5):
-    a, b = map(int, input("Введи номер строки и столбца куда поставить X через пробел").split())
-    a=a+1
-    b=b+1
-    myList[a][b]="X"
-    print_list()
-    if check() is False:
-        break
-    c, d = map(int, input("Введи номер строки и столбца куда поставить 0 через пробел").split())
-    c=c+1
-    d=d+1
-    myList[c][d] = "0"
-    print_list()
-    if check() is False:
-        break
-if check():
-    print("!!!НИЧЬЯ!!!")
+        turn = 'X'
